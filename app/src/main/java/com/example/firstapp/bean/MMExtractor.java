@@ -78,5 +78,19 @@ public class MMExtractor {
         mExtractor = null;
     }
 
+    public int getVideoTrack() {
+        return mVideoTrack;
+    }
 
+    public int getAudioTrack() {
+        return mAudioTrack;
+    }
+
+    public void setStartPos(long mStartPos) {
+        this.mStartPos = mStartPos;
+    }
+
+    public long getCurrentTimestamp() {
+        return mCurSampleTime;
+    }
 }

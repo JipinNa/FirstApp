@@ -41,7 +41,7 @@ public abstract class BaseDecoder implements IDecoder {
     //---------------解码数据信息----------------
     private MediaCodec.BufferInfo mBufferInfo = new MediaCodec.BufferInfo();
     private DecodeState mState = DecodeState.STOP;
-    private IDecoderStateListener mStateListener = null;
+    protected IDecoderStateListener mStateListener = null;
 
     //----------------数据流是否结束-------------
     private boolean mIsEOS = false;
@@ -49,9 +49,10 @@ public abstract class BaseDecoder implements IDecoder {
     protected int mVideoWidth = 0;
     protected int mVideoHeight = 0;
     private long mEndPos = 0;
-    private long mStartTimeForSync = 0;
+    private long mStartTimeForSync = -1l;
     private boolean mInRunning = false;
     private boolean mSyncRender = false;
+
 
     public BaseDecoder(@NonNull String filePath) {
         mFilePath = filePath;
@@ -351,23 +352,23 @@ public abstract class BaseDecoder implements IDecoder {
     }
 
     //配置解码器
-    abstract boolean configCodec(MediaCodec mCodec, MediaFormat format);
+    public abstract boolean configCodec(MediaCodec codec, MediaFormat format);
 
     //初始化渲染器
-    abstract boolean initRender();
+    public abstract boolean initRender();
 
     //初始化子类特有的参数
-    abstract void initSpecParams(MediaFormat format);
+    public abstract void initSpecParams(MediaFormat format);
 
     //初始化数据提取器
-    abstract IExtractor initExtractor(String filePath);
+    public abstract IExtractor initExtractor(String filePath);
 
     //检查子类参数
-    abstract boolean check();
+    public abstract boolean check();
 
     //渲染
-    abstract void render(ByteBuffer outputBuffer, MediaCodec.BufferInfo bufferInfo);
+    public abstract void render(ByteBuffer outputBuffer, MediaCodec.BufferInfo bufferInfo);
 
     //结束解码
-    abstract void doneDecode();
+    public abstract void doneDecode();
 }
