@@ -12,6 +12,7 @@ public class MMExtractor {
     private int mAudioTrack = -1;
     private int mVideoTrack = -1;
     private long mCurSampleTime = 0;
+    private int mCurSampleFlag = 0;
     private long mStartPos = 0;
 
     public MMExtractor(String path) {
@@ -56,6 +57,7 @@ public class MMExtractor {
             return -1;
         }
         mCurSampleTime = mExtractor.getSampleTime();
+        mCurSampleFlag = mExtractor.getSampleFlags();
         mExtractor.advance();
         return readSampleCount;
     }
@@ -92,5 +94,9 @@ public class MMExtractor {
 
     public long getCurrentTimestamp() {
         return mCurSampleTime;
+    }
+
+    public int getCurSampleFlag() {
+        return mCurSampleFlag;
     }
 }

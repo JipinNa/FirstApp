@@ -11,6 +11,7 @@ public interface IExtractor {
     int readBuffer(ByteBuffer byteBuffer);
     //获取当前帧时间
     long getCurrentTimestamp();
+    int getSimpleFlag();
     //Seek到指定位置，并返回实际帧的时间戳
     long seek(long pos);
     void setStartPos(long pos);

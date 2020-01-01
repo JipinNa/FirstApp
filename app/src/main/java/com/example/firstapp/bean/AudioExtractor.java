@@ -29,6 +29,11 @@ public class AudioExtractor implements IExtractor {
     }
 
     @Override
+    public int getSimpleFlag() {
+        return mMediaExtractor.getCurSampleFlag();
+    }
+
+    @Override
     public long seek(long pos) {
         return mMediaExtractor.seek(pos);
     }
